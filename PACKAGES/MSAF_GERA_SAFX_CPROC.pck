@@ -57,14 +57,16 @@ CREATE OR REPLACE PACKAGE MSAF_GERA_SAFX_CPROC IS
                         , P_PROCESSO NUMBER
                          );
                          
-  PROCEDURE P_GERA_DYN_TXT(P_SAFX       VARCHAR2
-                           , P_PROCESSO NUMBER
-                           , P_USUARIO  VARCHAR2
-                           , P_EMPRESA  VARCHAR2
-                           , P_ESTAB    VARCHAR2
-                           , P_DATA_INI DATE
-                           , P_DATA_FIM DATE
-                           , P_QTD_ARQ  NUMBER DEFAULT 1);
+  PROCEDURE P_GERA_DYN_TXT(P_SAFX             VARCHAR2
+                           , P_PROCESSO       NUMBER
+                           , P_USUARIO        VARCHAR2
+                           , P_EMPRESA        VARCHAR2
+                           , P_ESTAB          VARCHAR2
+                           , P_DATA_INI       DATE
+                           , P_DATA_FIM       DATE
+                           , P_QTD_ARQ        NUMBER DEFAULT 1
+                           , P_IND_UTIL_DATA  VARCHAR2 DEFAULT 'N'
+                           , P_COL_FIL_DATA   VARCHAR2 DEFAULT NULL);
                         
   /*PROCEDURE IMPORTA_SAFX (PCOD_EMPRESA VARCHAR2
                           , PCOD_ESTAB   VARCHAR2
@@ -2187,14 +2189,16 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
   END;
 
 
-  PROCEDURE P_GERA_DYN_TXT(P_SAFX       VARCHAR2
-                           , P_PROCESSO NUMBER
-                           , P_USUARIO  VARCHAR2
-                           , P_EMPRESA  VARCHAR2
-                           , P_ESTAB    VARCHAR2
-                           , P_DATA_INI DATE
-                           , P_DATA_FIM DATE
-                           , P_QTD_ARQ  NUMBER DEFAULT 1) IS
+  PROCEDURE P_GERA_DYN_TXT(P_SAFX             VARCHAR2
+                           , P_PROCESSO       NUMBER
+                           , P_USUARIO        VARCHAR2
+                           , P_EMPRESA        VARCHAR2
+                           , P_ESTAB          VARCHAR2
+                           , P_DATA_INI       DATE
+                           , P_DATA_FIM       DATE
+                           , P_QTD_ARQ        NUMBER DEFAULT 1
+                           , P_IND_UTIL_DATA  VARCHAR2 DEFAULT 'N'
+                           , P_COL_FIL_DATA   VARCHAR2 DEFAULT NULL) IS
                        
   VRC_SAFX             SYS_REFCURSOR;
   VN_ID_CURSOR         NUMBER;
@@ -2212,7 +2216,9 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
   VS_DIRETORIO         VARCHAR2(250);
   VS_NOME_ARQUIVO      VARCHAR2(150);
   W_ARQ                UTL_FILE.file_type;
-                       
+
+  exInvalidUtilData    EXCEPTION;
+
   BEGIN
     -- temporario para teste
     --VS_DIRETORIO    := 'MSAF';
@@ -2231,6 +2237,7 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
     VS_NOME_ARQUIVO := VS_NOME_ARQUIVO||'.taxonetmp';
     
     -- PREPARAR SQL DINAMICAMENTE, ORDENANDO CAMPOS DA SAFX
+/*
     BEGIN
       SELECT 'SELECT '|| RTRIM(XMLAGG(XMLELEMENT(E, NOME_CAMPO, ', ').EXTRACT('//text()') ORDER BY NUM_CAMPO).GETCLOBVAL(),
                                 ', ') || ' FROM '||P_SAFX||' WHERE PST_ID = '||P_PROCESSO X INTO VC_SQL
@@ -2243,8 +2250,41 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
       VL_SQL1 := DBMS_LOB.SUBSTR(VC_SQL, 8000, 1);
       VL_SQL2 := DBMS_LOB.SUBSTR(VC_SQL, 8000, 8001);
     END;
-    
-    
+*/
+
+    BEGIN
+      IF P_IND_UTIL_DATA = 'N' THEN
+        
+        SELECT 'SELECT '|| RTRIM(XMLAGG(XMLELEMENT(E, NOME_CAMPO, ', ').EXTRACT('//text()') ORDER BY NUM_CAMPO).GETCLOBVAL(),
+                                  ', ') || ' FROM '||P_SAFX||' WHERE PST_ID = '||P_PROCESSO X INTO VC_SQL
+          FROM CAT_LAYOUT_IMP
+         WHERE 1=1--ROWNUM <= 500
+           AND NOM_TAB_WORK = P_SAFX
+         ORDER BY NUM_CAMPO;
+      
+      ELSIF P_IND_UTIL_DATA = 'S' THEN
+        
+        SELECT 'SELECT '|| RTRIM(XMLAGG(XMLELEMENT(E, NOME_CAMPO, ', ').EXTRACT('//text()') ORDER BY NUM_CAMPO).GETCLOBVAL(),
+                                  ', ') || ' FROM '||P_SAFX||' WHERE PST_ID = '||P_PROCESSO||' AND '||P_COL_FIL_DATA||' BETWEEN '||TO_CHAR(P_DATA_INI,'YYYYMMDD')||' AND '||TO_CHAR(P_DATA_FIM,'YYYYMMDD') X INTO VC_SQL
+          FROM CAT_LAYOUT_IMP
+         WHERE 1=1--ROWNUM <= 500
+           AND NOM_TAB_WORK = P_SAFX
+         ORDER BY NUM_CAMPO;
+         
+      
+      ELSIF P_IND_UTIL_DATA = 'S' AND NVL(P_COL_FIL_DATA,' ') = ' ' THEN
+       RAISE exInvalidUtilData;
+      ELSE
+       RAISE exInvalidUtilData;
+      
+      END IF;
+    END;
+
+      -- CONVERTE CLOB PARA LONG
+        VL_SQL1 := DBMS_LOB.SUBSTR(VC_SQL, 8000, 1);
+        VL_SQL2 := DBMS_LOB.SUBSTR(VC_SQL, 8000, 8001);
+
+
     -- PREPARA REF CURSOR
     BEGIN
      OPEN VRC_SAFX FOR VL_SQL1||VL_SQL2;
@@ -2398,6 +2438,13 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
     LIB_PROC.ADD_LOG('Aguarde a rotina SFTP realizar a transferência e importação dos dados nos próximos minutos',1);
     
    EXCEPTION
+     WHEN exInvalidUtilData THEN
+
+       P_LIMPA_SAFX(P_SAFX => P_SAFX, P_PROCESSO => P_PROCESSO);
+    
+       LIB_PROC.ADD_LOG('',1);
+       LIB_PROC.ADD_LOG('Parâmetros incorretos para chamada da procedure P_GERA_DYN_TXT'||SQLERRM||' - '||dbms_utility.format_error_backtrace,1);
+              
      WHEN OTHERS THEN
        P_LIMPA_SAFX(P_SAFX => P_SAFX, P_PROCESSO => P_PROCESSO);
     
