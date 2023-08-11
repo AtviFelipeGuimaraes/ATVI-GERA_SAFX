@@ -55,7 +55,10 @@ CREATE OR REPLACE PACKAGE MSAF_GERA_SAFX_CPROC IS
                         
   PROCEDURE P_LIMPA_SAFX(P_SAFX      VARCHAR2
                         , P_PROCESSO NUMBER
-                         );
+                        , P_DATA_INI DATE DEFAULT NULL
+                        , P_DATA_FIM DATE DEFAULT NULL
+                        , P_IND_UTIL_DATA VARCHAR2 DEFAULT 'N'
+                        , P_COL_FIL_DATA  VARCHAR2 DEFAULT NULL);
                          
   PROCEDURE P_GERA_DYN_TXT(P_SAFX             VARCHAR2
                            , P_PROCESSO       NUMBER
@@ -2150,16 +2153,42 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
   
   PROCEDURE P_LIMPA_SAFX(P_SAFX      VARCHAR2
                         , P_PROCESSO NUMBER
-                         ) IS
+                        , P_DATA_INI DATE DEFAULT NULL
+                        , P_DATA_FIM DATE DEFAULT NULL
+                        , P_IND_UTIL_DATA VARCHAR2 DEFAULT 'N'
+                        , P_COL_FIL_DATA  VARCHAR2 DEFAULT NULL) IS
                          
   cur_safx SYS_REFCURSOR;
   TYPE tp_rowid IS TABLE OF VARCHAR2(100) INDEX BY PLS_INTEGER;
   tb_rowid tp_rowid;
   vn_bulk_limit CONSTANT INTEGER := '1000';
+  vsql          VARCHAR2(2500);
+  exInvalidUtilData    EXCEPTION;  
                          
   BEGIN
     
-  OPEN cur_safx FOR 'select rowid from '||P_SAFX||' where pst_id = '||P_PROCESSO;
+  --OPEN cur_safx FOR 'select rowid from '||P_SAFX||' where pst_id = '||P_PROCESSO;
+  
+      IF P_IND_UTIL_DATA = 'N' THEN
+
+       vsql := 'select rowid from '||P_SAFX||' where 1=1 and pst_id = '||P_PROCESSO;
+
+      ELSIF P_IND_UTIL_DATA = 'S' AND NVL(P_COL_FIL_DATA,' ') = ' ' THEN
+       RAISE exInvalidUtilData;
+             
+      ELSIF P_IND_UTIL_DATA = 'S' AND P_COL_FIL_DATA IS NOT NULL THEN
+
+      vsql := 'select rowid from '||P_SAFX||' where 1=1 '||
+              ' AND '||P_COL_FIL_DATA||' >= '||''''||TO_CHAR(TO_DATE(P_DATA_INI),'YYYYMMDD')||''''||
+              ' AND '||P_COL_FIL_DATA||' <= '||''''||TO_CHAR(TO_DATE(P_DATA_FIM),'YYYYMMDD')||''''||
+              ' and pst_id = '||P_PROCESSO;
+
+      ELSE
+       RAISE exInvalidUtilData;
+      
+      END IF;
+  
+  OPEN cur_safx FOR vsql;
   LOOP
     
   FETCH cur_safx BULK COLLECT INTO tb_rowid LIMIT vn_bulk_limit;
@@ -2182,6 +2211,10 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
   --COMMIT;
     
    EXCEPTION
+     WHEN exInvalidUtilData THEN
+       LIB_PROC.ADD_LOG('',1);
+       LIB_PROC.ADD_LOG('Parâmetros incorretos para chamada da procedure P_LIMPA_SAFX'||SQLERRM||' - '||dbms_utility.format_error_backtrace,1);
+
      WHEN OTHERS THEN
        LIB_PROC.ADD_LOG('',1);
        LIB_PROC.ADD_LOG('Erro inesperado ao limpar SAFX, motivo: '||SQLERRM||' - '||dbms_utility.format_error_backtrace,1);
@@ -2267,10 +2300,15 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
              
       ELSIF P_IND_UTIL_DATA = 'S' AND P_COL_FIL_DATA IS NOT NULL THEN
         
-        SELECT 'SELECT '|| RTRIM(XMLAGG(XMLELEMENT(E, NOME_CAMPO, ', ').EXTRACT('//text()') ORDER BY NUM_CAMPO).GETCLOBVAL(),
-                                  ', ') || ' FROM '||P_SAFX||' WHERE PST_ID = '||P_PROCESSO||' AND '||P_COL_FIL_DATA||' >= '||TO_CHAR(P_DATA_INI,'YYYYMMDD')||' AND '||P_COL_FIL_DATA||' <= '||TO_CHAR(P_DATA_FIM,'YYYYMMDD') X INTO VC_SQL
+        SELECT 'SELECT ' || RTRIM(XMLAGG(XMLELEMENT(E, NOME_CAMPO, ', ').EXTRACT('//text()') ORDER BY NUM_CAMPO).GETCLOBVAL(),
+                                  ', ') || ' FROM ' || P_SAFX ||
+               ' WHERE 1=1 '||
+               ' AND '||P_COL_FIL_DATA||' >= '||''''||TO_CHAR(TO_DATE(P_DATA_INI),'YYYYMMDD')||''''||
+               ' AND '||P_COL_FIL_DATA||' <= '||''''||TO_CHAR(TO_DATE(P_DATA_FIM),'YYYYMMDD')||''''||
+               'AND PST_ID = ' || P_PROCESSO X
+          INTO VC_SQL
           FROM CAT_LAYOUT_IMP
-         WHERE 1=1--ROWNUM <= 500
+         WHERE 1 = 1 --ROWNUM <= 500
            AND NOM_TAB_WORK = P_SAFX
          ORDER BY NUM_CAMPO;
 
@@ -2430,7 +2468,13 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
     
     
     -- termino da execucao
-    P_LIMPA_SAFX(P_SAFX => P_SAFX, P_PROCESSO => P_PROCESSO);
+    P_LIMPA_SAFX(P_SAFX          => P_SAFX,
+                 P_PROCESSO      => P_PROCESSO,
+                 P_DATA_INI      => P_DATA_INI,
+                 P_DATA_FIM      => P_DATA_FIM,
+                 P_IND_UTIL_DATA => P_IND_UTIL_DATA,
+                 P_COL_FIL_DATA  => P_COL_FIL_DATA
+                 );
     
     -- log de geração
     LIB_PROC.ADD_LOG('',1);
@@ -2440,13 +2484,25 @@ FUNCTION GERA_SAFX2013(P_LINHA_X2013  X2013_PRODUTO%ROWTYPE DEFAULT NULL
    EXCEPTION
      WHEN exInvalidUtilData THEN
 
-       P_LIMPA_SAFX(P_SAFX => P_SAFX, P_PROCESSO => P_PROCESSO);
+    P_LIMPA_SAFX(P_SAFX          => P_SAFX,
+                 P_PROCESSO      => P_PROCESSO,
+                 P_DATA_INI      => P_DATA_INI,
+                 P_DATA_FIM      => P_DATA_FIM,
+                 P_IND_UTIL_DATA => P_IND_UTIL_DATA,
+                 P_COL_FIL_DATA  => P_COL_FIL_DATA
+                 );
     
        LIB_PROC.ADD_LOG('',1);
        LIB_PROC.ADD_LOG('Parâmetros incorretos para chamada da procedure P_GERA_DYN_TXT'||SQLERRM||' - '||dbms_utility.format_error_backtrace,1);
               
      WHEN OTHERS THEN
-       P_LIMPA_SAFX(P_SAFX => P_SAFX, P_PROCESSO => P_PROCESSO);
+    P_LIMPA_SAFX(P_SAFX          => P_SAFX,
+                 P_PROCESSO      => P_PROCESSO,
+                 P_DATA_INI      => P_DATA_INI,
+                 P_DATA_FIM      => P_DATA_FIM,
+                 P_IND_UTIL_DATA => P_IND_UTIL_DATA,
+                 P_COL_FIL_DATA  => P_COL_FIL_DATA
+                 );
     
        LIB_PROC.ADD_LOG('',1);
        LIB_PROC.ADD_LOG('Erro inesperado ao gerar arquivo txt, motivo: '||SQLERRM||' - '||dbms_utility.format_error_backtrace,1);
