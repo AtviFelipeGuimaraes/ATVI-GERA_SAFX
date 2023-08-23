@@ -8485,6 +8485,8 @@ Function X112(p_Cod_Empresa       IN Varchar2,
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Observacao;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+        lib_proc.add_log(SQLERRM||' - '||dbms_utility.format_error_backtrace,1);
+        lib_proc.add_log('Ident_Observacao: '||p_Ident_Observacao,1);        
         Raise Erro_Leitura;
     End;
 
