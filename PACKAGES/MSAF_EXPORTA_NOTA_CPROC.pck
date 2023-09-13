@@ -892,7 +892,7 @@ END MSAF_EXPORTA_NOTA_CPROC;
 CREATE OR REPLACE PACKAGE BODY MSAF_EXPORTA_NOTA_CPROC IS
 
 
-  Erro_Leitura Exception;
+--  Erro_Leitura Exception;
 
   MSG_ERRO_W VARCHAR2(200);
 
@@ -1180,6 +1180,8 @@ END PROC_LINHA;
         When Others Then
           Cod_Erro_w := 60109;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     End Loop; -- FIM LOOP TRIBUTOS
@@ -1271,6 +1273,8 @@ END PROC_LINHA;
         When Others Then
           Cod_Erro_w := 60110;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     End Loop; -- FIM LOOP BASES
@@ -1616,6 +1620,9 @@ END PROC_LINHA;
         Cod_Erro_w := 60005;
         Chave_w    := p_Ident_Docto;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -1642,6 +1649,9 @@ END PROC_LINHA;
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Fis_Jur;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -1693,6 +1703,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60024;
           Chave_w    := p_Ident_Modelo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -1717,6 +1730,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60012;
           Chave_w    := p_Ident_Cfo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -1740,6 +1756,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60006;
           Chave_w    := p_Ident_Natureza_Op;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -1867,6 +1886,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60002;
           Chave_w    := p_Ident_Conta;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2174,6 +2196,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60124;
           Chave_w    := p_Ident_Quitacao;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2275,6 +2300,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60104;
           Chave_w    := p_Ident_Fis_Jur;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2306,6 +2334,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60102;
           Chave_w    := p_Ident_Uf_Orig_Dest;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2354,6 +2385,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60102;
           Chave_w    := p_Ident_Uf_Destino;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2423,6 +2457,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60104;
           Chave_w    := p_Ident_Fisjur_Lsg;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2501,6 +2538,9 @@ END PROC_LINHA;
             Cod_Erro_w := 91001;
             Chave_w    := Cod_Estado_w;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       Elsif p_Movto_e_s <> '9' Then
@@ -2522,6 +2562,9 @@ END PROC_LINHA;
             Cod_Erro_w := 50777;
             Chave_w    := p_Ident_Fis_Jur;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       End If;
@@ -2582,6 +2625,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60102;
           Chave_w    := p_Ident_Uf_Armaz_Orig;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2618,6 +2664,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60102;
           Chave_w    := p_Ident_Uf_Armaz_Dest;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2826,6 +2875,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60009;
           Chave_w    := p_Ident_Observacao;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2851,6 +2903,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60049;
           Chave_w    := p_Ident_Situacao_a;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -2876,6 +2931,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60050;
           Chave_w    := p_Ident_Situacao_b;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
 
@@ -3002,6 +3060,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60125;
           Chave_w    := p_Ident_Classe_Consumo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -3108,6 +3169,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60102;
           Chave_w    := p_Ident_Uf_Consumo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -3332,6 +3396,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60104;
           Chave_w    := p_Ident_Fis_Conces;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -3394,6 +3461,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60125;
           Chave_w    := p_Ident_Classe_Consumo_sef_pe;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -3588,6 +3658,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60125;
           Chave_w    := P_IDENT_SCP;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     End If;
@@ -4231,6 +4304,9 @@ END PROC_LINHA;
           When Others Then
             Cod_Erro_w := 60109;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       End Loop; -- FIM LOOP TRIBUTOS
@@ -4302,6 +4378,9 @@ END PROC_LINHA;
           When Others Then
             Cod_Erro_w := 60110;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       End Loop; -- FIM LOOP BASES
@@ -4356,6 +4435,9 @@ END PROC_LINHA;
         Cod_Erro_w := 60005;
         Chave_w    := p_Ident_Docto;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -4382,6 +4464,9 @@ END PROC_LINHA;
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Fis_Jur;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -4436,6 +4521,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60013;
           Chave_w    := p_Ident_Produto;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4472,6 +4560,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60017;
           Chave_w    := p_Ident_Und_Padrao;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4502,6 +4593,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60021;
           Chave_w    := p_Ident_Almox;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4526,6 +4620,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60003;
           Chave_w    := p_Ident_Custo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4556,6 +4653,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60012;
           Chave_w    := p_Ident_Cfo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4580,6 +4680,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60006;
           Chave_w    := p_Ident_Natureza_Op;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4610,6 +4713,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60007;
           Chave_w    := p_Ident_Medida;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4634,6 +4740,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60043;
           Chave_w    := p_Ident_Nbm;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4682,6 +4791,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60046;
           Chave_w    := p_Ident_Situacao_a;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4706,6 +4818,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60041;
           Chave_w    := p_Ident_Situacao_b;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -4730,6 +4845,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60044;
           Chave_w    := p_Ident_Federal;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -5082,6 +5200,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60002;
           Chave_w    := p_Ident_Conta;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -5148,6 +5269,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60015;
           Chave_w    := p_Ident_Oper_Oil;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -5179,6 +5303,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60016;
           Chave_w    := p_Ident_Projeto;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -5446,6 +5573,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60009;
           Chave_w    := p_Ident_Observacao;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -5501,6 +5631,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60102;
           Chave_w    := p_Ident_Uf_Operadora;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -6020,6 +6153,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60104;
           Chave_w    := p_Ident_Fis_Jur;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
 
@@ -6058,6 +6194,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60012;
           Chave_w    := P_IDENT_CFO_DCIP;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     ELSE
@@ -6150,6 +6289,9 @@ END PROC_LINHA;
             Cod_Erro_w := 92956;
             Chave_w    := P_IDENT_PROC_ADJ_PRINC;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       Else
@@ -6185,6 +6327,9 @@ END PROC_LINHA;
             Cod_Erro_w := 92957;
             Chave_w    := P_IDENT_SUSP_TBT_PRINC;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       Else
@@ -6219,6 +6364,9 @@ END PROC_LINHA;
             Cod_Erro_w := 92956;
             Chave_w    := P_IDENT_PROC_ADJ_ADIC;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       Else
@@ -6254,6 +6402,9 @@ END PROC_LINHA;
             Cod_Erro_w := 92957;
             Chave_w    := P_IDENT_SUSP_TBT_ADIC;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       Else
@@ -6586,6 +6737,9 @@ END PROC_LINHA;
           When Others Then
             Cod_Erro_w := 60109;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       End Loop; -- FIM LOOP TRIBUTOS
@@ -6623,6 +6777,9 @@ END PROC_LINHA;
           When Others Then
             Cod_Erro_w := 60110;
             Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             Raise Erro_Leitura;
         End;
       End Loop; -- FIM LOOP BASES
@@ -6677,6 +6834,9 @@ END PROC_LINHA;
         Cod_Erro_w := 60005;
         Chave_w    := p_Ident_Docto;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -6703,6 +6863,9 @@ END PROC_LINHA;
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Fis_Jur;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -6741,6 +6904,9 @@ END PROC_LINHA;
         Cod_Erro_w := 60018;
         Chave_w    := p_Ident_Servico;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -6782,6 +6948,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60012;
           Chave_w    := p_Ident_Cfo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -6806,6 +6975,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60006;
           Chave_w    := p_Ident_Natureza_Op;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -6902,6 +7074,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60013;
           Chave_w    := p_Ident_Produto;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -6991,6 +7166,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60002;
           Chave_w    := p_Ident_Conta;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7015,6 +7193,9 @@ END PROC_LINHA;
           COD_ERRO_W := 60007;
           CHAVE_W    := P_IDENT_OBSERVACAO;
           MSG_ERRO_W := SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           RAISE ERRO_LEITURA;
       END;
     ELSE
@@ -7238,6 +7419,9 @@ END PROC_LINHA;
           Cod_Erro_w := 60003;
           Chave_w    := p_Ident_Custo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7301,6 +7485,9 @@ END PROC_LINHA;
           Cod_Erro_w := 92464;
           Chave_w    := P_IDENT_NBS;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7400,6 +7587,9 @@ END PROC_LINHA;
           Cod_Erro_w := 92949;
           Chave_w    := P_IDENT_PROC_ADJ_PRINC;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7424,6 +7614,9 @@ END PROC_LINHA;
           Cod_Erro_w := 92950;
           Chave_w    := P_IDENT_SUSP_TBT_PRINC;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7454,6 +7647,9 @@ END PROC_LINHA;
           Cod_Erro_w := 92956;
           Chave_w    := P_IDENT_PROC_ADJ_ADIC;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7478,6 +7674,9 @@ END PROC_LINHA;
           Cod_Erro_w := 92957;
           Chave_w    := P_IDENT_SUSP_TBT_ADIC;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7700,6 +7899,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
         Cod_Erro_w := 60005;
         Chave_w    := p_Ident_Docto;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -7752,6 +7954,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
         Cod_Erro_w := 60013;
         Chave_w    := p_Ident_Produto;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -7773,6 +7978,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60017;
           Chave_w    := p_Ident_Und_Padrao;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7797,6 +8005,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60021;
           Chave_w    := p_Ident_Almox;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7821,6 +8032,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60003;
           Chave_w    := p_Ident_Custo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7851,6 +8065,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60010;
           Chave_w    := p_Ident_Nat_Estoque;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7917,6 +8134,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60002;
           Chave_w    := p_Ident_Conta_Cred;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7941,6 +8161,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60002;
           Chave_w    := p_Ident_Conta_Debito;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7965,6 +8188,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60001;
           Chave_w    := p_Ident_Operacao;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -7989,6 +8215,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60012;
           Chave_w    := p_Ident_Cfo;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -8037,6 +8266,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60007;
           Chave_w    := p_Ident_Medida;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -8061,6 +8293,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60043;
           Chave_w    := p_Ident_Nbm;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -8091,6 +8326,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60008;
           Chave_w    := p_Ident_Legenda;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -8147,6 +8385,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60104;
           Chave_w    := p_Ident_Fis_Jur;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -8309,6 +8550,9 @@ Function X10(p_Cod_Empresa         IN Varchar2,
           Cod_Erro_w := 60007;
           Chave_w    := p_Ident_Medida_Ori;
           Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
           Raise Erro_Leitura;
       End;
     Else
@@ -8419,6 +8663,9 @@ Function X112(p_Cod_Empresa       IN Varchar2,
         Cod_Erro_w := 60005;
         Chave_w    := p_Ident_Docto;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8447,6 +8694,9 @@ Function X112(p_Cod_Empresa       IN Varchar2,
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Fis_Jur;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8487,6 +8737,9 @@ Function X112(p_Cod_Empresa       IN Varchar2,
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
         lib_proc.add_log(SQLERRM||' - '||dbms_utility.format_error_backtrace,1);
         lib_proc.add_log('Ident_Observacao: '||p_Ident_Observacao,1);        
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8598,6 +8851,9 @@ Function X113(p_Cod_Empresa      in Varchar2,
         Cod_Erro_w := 60005;
         Chave_w    := p_Ident_Docto;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8626,6 +8882,9 @@ Function X113(p_Cod_Empresa      in Varchar2,
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Fis_Jur;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8664,6 +8923,9 @@ Function X113(p_Cod_Empresa      in Varchar2,
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Observacao;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8684,6 +8946,9 @@ Function X113(p_Cod_Empresa      in Varchar2,
         Cod_Erro_w := 60104;
         Chave_w    := p_Cod_Ajuste_Sped;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8814,6 +9079,9 @@ Function X116(p_Cod_Empresa          in Varchar2,
         Cod_Erro_w := 60005;
         Chave_w    := p_Ident_Docto;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8842,6 +9110,9 @@ Function X116(p_Cod_Empresa          in Varchar2,
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Fis_Jur;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8880,6 +9151,9 @@ Function X116(p_Cod_Empresa          in Varchar2,
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Observacao;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8932,6 +9206,9 @@ Function X116(p_Cod_Empresa          in Varchar2,
         Cod_Erro_w := 60104;
         Chave_w    := p_Ident_Fis_Jur_Ref;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -8959,6 +9236,9 @@ Function X116(p_Cod_Empresa          in Varchar2,
         Cod_Erro_w := 60024;
         Chave_w    := p_Ident_Modelo_Ref;
         Msg_Erro_w := Substr(Sqlerrm, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
         Raise Erro_Leitura;
     End;
 
@@ -9108,6 +9388,9 @@ BEGIN
             COD_ERRO_W := 60043;
             CHAVE_W    := pIDENT_NBM;
             MSG_ERRO_W := SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             RAISE ERRO_LEITURA;
         END;
       ELSE
@@ -9132,6 +9415,9 @@ BEGIN
             COD_ERRO_W := 60045;
             CHAVE_W    := pIDENT_NCM;
             MSG_ERRO_W := 'AAA' || SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             RAISE ERRO_LEITURA;
         END;
       ELSE
@@ -9156,6 +9442,9 @@ BEGIN
             COD_ERRO_W := 60083;
             CHAVE_W    := pIDENT_NALADI;
             MSG_ERRO_W := SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             RAISE ERRO_LEITURA;
         END;
       ELSE
@@ -9215,6 +9504,9 @@ BEGIN
             COD_ERRO_W := 60014;
             CHAVE_W    := pIDENT_PRODUTO;
             MSG_ERRO_W := SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             RAISE ERRO_LEITURA;
         END;
       ELSE
@@ -9242,6 +9534,9 @@ BEGIN
             COD_ERRO_W := 60007;
             CHAVE_W    := pIDENT_MEDIDA;
             MSG_ERRO_W := SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             RAISE ERRO_LEITURA;
         END;
       ELSE
@@ -9266,6 +9561,9 @@ BEGIN
             COD_ERRO_W := 60100;
             CHAVE_W    := pIDENT_GRUPO_PROD;
             MSG_ERRO_W := SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             RAISE ERRO_LEITURA;
         END;
       ELSE
@@ -9302,6 +9600,9 @@ BEGIN
             COD_ERRO_W := 60002;
             CHAVE_W    := pIDENT_CONTA;
             MSG_ERRO_W := SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             RAISE ERRO_LEITURA;
         END;
       ELSE
@@ -9332,6 +9633,9 @@ BEGIN
             COD_ERRO_W := 60017;
             CHAVE_W    := pIDENT_UND_PADRAO;
             MSG_ERRO_W := SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             RAISE ERRO_LEITURA;
         END;
       ELSE
@@ -9398,6 +9702,9 @@ BEGIN
             COD_ERRO_W := 60017;
             CHAVE_W    := pIDENT_GRP_PROD;
             MSG_ERRO_W := SUBSTR(SQLERRM, 1, 200);
+          lib_proc.add_log('Chave erro: "'||Chave_w||'"',1);
+          lib_proc.add_log('Código erro: '||Cod_Erro_w,1);
+          lib_proc.add_log('Mensagem erro: '||Msg_Erro_w,1);
             RAISE ERRO_LEITURA;
         END;
       ELSE
